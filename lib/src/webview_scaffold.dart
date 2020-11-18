@@ -41,6 +41,8 @@ class WebviewScaffold extends StatefulWidget {
     this.geolocationEnabled,
     this.debuggingEnabled = false,
     this.ignoreSSLErrors = false,
+    this.onUrlChanged,
+    this.onStateChanged,
   }) : super(key: key);
 
   final PreferredSizeWidget appBar;
@@ -74,6 +76,8 @@ class WebviewScaffold extends StatefulWidget {
   final bool useWideViewPort;
   final bool debuggingEnabled;
   final bool ignoreSSLErrors;
+  final void Function(String url) onUrlChanged;
+  final void Function(WebViewStateChanged state) onStateChanged;
 
   @override
   _WebviewScaffoldState createState() => _WebviewScaffoldState();
@@ -91,6 +95,9 @@ class _WebviewScaffoldState extends State<WebviewScaffold> {
   void initState() {
     super.initState();
     webviewReference.close();
+
+    webviewReference.onUrlChanged.listen(widget.onUrlChanged);
+    webviewReference.onStateChanged.listen(widget.onStateChanged);
 
     _onBack = webviewReference.onBack.listen((_) async {
       if (!mounted) {
