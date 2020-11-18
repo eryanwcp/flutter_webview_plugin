@@ -41,6 +41,7 @@ class WebviewScaffold extends StatefulWidget {
     this.geolocationEnabled,
     this.debuggingEnabled = false,
     this.ignoreSSLErrors = false,
+    this.thirdPartyCookiesEnabled = false,
     this.onUrlChanged,
     this.onStateChanged,
   }) : super(key: key);
@@ -76,6 +77,7 @@ class WebviewScaffold extends StatefulWidget {
   final bool useWideViewPort;
   final bool debuggingEnabled;
   final bool ignoreSSLErrors;
+  final bool thirdPartyCookiesEnabled;
   final void Function(String url) onUrlChanged;
   final void Function(WebViewStateChanged state) onStateChanged;
 
@@ -187,6 +189,7 @@ class _WebviewScaffoldState extends State<WebviewScaffold> {
               geolocationEnabled: widget.geolocationEnabled,
               debuggingEnabled: widget.debuggingEnabled,
               ignoreSSLErrors: widget.ignoreSSLErrors,
+              thirdPartyCookiesEnabled: widget.thirdPartyCookiesEnabled,
             );
           } else {
             if (_rect != value) {
